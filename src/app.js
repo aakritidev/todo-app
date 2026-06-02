@@ -1,4 +1,6 @@
 const STORAGE_KEY = "modern-todo-app.tasks";
+const THEME_KEY = "modern-todo-app.theme";
+const DEFAULT_THEME = "dark";
 
 const elements = {
   form: document.getElementById("todo-form"),
@@ -6,10 +8,12 @@ const elements = {
   list: document.getElementById("todo-list"),
   count: document.getElementById("todo-count"),
   clearButton: document.getElementById("clear-completed"),
+  themeToggle: document.getElementById("theme-toggle"),
 };
 
 const taskState = {
   tasks: [],
+  theme: DEFAULT_THEME,
 };
 
 const createTask = (text) => ({
@@ -23,9 +27,37 @@ const saveTasks = () => {
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(taskState.tasks));
 };
 
+const saveTheme = () => {
+  window.localStorage.setItem(THEME_KEY, taskState.theme);
+};
+
 const loadTasks = () => {
   const saved = window.localStorage.getItem(STORAGE_KEY);
   taskState.tasks = saved ? JSON.parse(saved) : [];
+};
+
+const loadTheme = () => {
+  const savedTheme = window.localStorage.getItem(THEME_KEY);
+  taskState.theme = savedTheme === "light" ? "light" : DEFAULT_THEME;
+};
+
+const applyTheme = (theme) => {
+  taskState.theme = theme;
+  document.body.dataset.theme = theme;
+  elements.themeToggle.innerHTML =
+    theme === "dark"
+      ? '<i class="ri-sun-line"></i>'
+      : '<i class="ri-contrast-2-line"></i>';
+  elements.themeToggle.setAttribute(
+    "aria-label",
+    theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+  );
+};
+
+const toggleTheme = () => {
+  const nextTheme = taskState.theme === "dark" ? "light" : "dark";
+  applyTheme(nextTheme);
+  saveTheme();
 };
 
 const getTaskCountText = (count) => `${count} item${count === 1 ? "" : "s"}`;
@@ -176,10 +208,13 @@ const attachListeners = () => {
   });
 
   elements.clearButton.addEventListener("click", clearCompletedTasks);
+  elements.themeToggle.addEventListener("click", toggleTheme);
 };
 
 const initializeApp = () => {
   loadTasks();
+  loadTheme();
+  applyTheme(taskState.theme);
   renderTasks();
   attachListeners();
 };

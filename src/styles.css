@@ -12,6 +12,20 @@
   --shadow: 0 30px 80px rgba(15, 23, 42, 0.35);
 }
 
+body[data-theme="light"] {
+  color-scheme: light;
+  --bg: #eff6ff;
+  --panel: #ffffff;
+  --surface: #f8fafc;
+  --surface-strong: #e2e8f0;
+  --text: #0f172a;
+  --muted: #64748b;
+  --accent: #2563eb;
+  --success: #16a34a;
+  --danger: #ea580c;
+  --shadow: 0 30px 80px rgba(15, 23, 42, 0.08);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -36,6 +50,12 @@ body {
   color: var(--text);
 }
 
+body[data-theme="light"] {
+  background:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 35%),
+    linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
+}
+
 button,
 input {
   font: inherit;
@@ -53,7 +73,7 @@ input {
   border: 1px solid rgba(148, 163, 184, 0.15);
   border-radius: 28px;
   padding: 2rem;
-  background: rgba(15, 23, 42, 0.92);
+  background: var(--panel);
   box-shadow: var(--shadow);
 }
 
@@ -78,12 +98,34 @@ input {
   font-size: clamp(2rem, 4vw, 3.2rem);
 }
 
+.theme-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .theme-pill {
   padding: 0.6rem 1rem;
   background: rgba(56, 189, 248, 0.12);
   color: var(--accent);
   border-radius: 999px;
   font-size: 0.85rem;
+}
+
+.theme-toggle {
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 14px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.theme-toggle:hover {
+  background: rgba(56, 189, 248, 0.18);
 }
 
 .todo-form {

@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Modern Todo App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
@@ -14,7 +18,16 @@
             <p class="subtitle">Daily productivity</p>
             <h1>Modern Todo App</h1>
           </div>
-          <div class="theme-pill">Local Storage</div>
+          <div class="theme-controls">
+            <button
+              id="theme-toggle"
+              class="theme-toggle"
+              type="button"
+              aria-label="Toggle theme"
+            >
+              <i class="ri-contrast-2-line"></i>
+            </button>
+          </div>
         </header>
 
         <form id="todo-form" class="todo-form" autocomplete="off">
