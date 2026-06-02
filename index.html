@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Todo App</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="todo-panel">
+        <header class="todo-header">
+          <div>
+            <p class="subtitle">Daily productivity</p>
+            <h1>Modern Todo App</h1>
+          </div>
+          <div class="theme-pill">Local Storage</div>
+        </header>
+
+        <form id="todo-form" class="todo-form" autocomplete="off">
+          <label class="sr-only" for="todo-input">Add new todo</label>
+          <input
+            id="todo-input"
+            class="todo-input"
+            type="text"
+            placeholder="Add a new task"
+            maxlength="120"
+            required
+          />
+          <button class="primary-button" type="submit">Add</button>
+        </form>
+
+        <div class="todo-info">
+          <span id="todo-count">0 items</span>
+          <button id="clear-completed" class="link-button" type="button">
+            Clear completed
+          </button>
+        </div>
+
+        <ul id="todo-list" class="todo-list" aria-live="polite"></ul>
+      </section>
+    </main>
+
+    <script src="src/app.js"></script>
+  </body>
+</html>
